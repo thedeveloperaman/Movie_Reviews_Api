@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}My Reviews | MovieDB{% endblock %}
+{% block content %}
+<h2 class="mb-4">My Reviews</h2>
+{% if reviews %}
+<div class="list-group">
+    {% for review in reviews %}
+    <div class="list-group-item mb-3">
+        <h5>{{ review.movie_title }}</h5>
+        <div>
+            <strong>Rating:</strong> {{ review.rating }}/10
+        </div>
+        <div>
+            <strong>Review:</strong> {{ review.text|linebreaks }}
+        </div>
+        <div class="text-muted small">
+            {{ review.created_at|date:"M d, Y H:i" }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>You haven't written any reviews yet.</p>
+{% endif %}
+{% endblock %}

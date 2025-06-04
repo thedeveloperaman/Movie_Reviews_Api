@@ -1,0 +1,32 @@
+/* Navbar styles */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Footer styles */
+footer {
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.08);
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.social-links a {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/* Main content styles */
+main {
+    min-height: calc(100vh - 300px);
+}

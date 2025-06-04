@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ movie.title }} | MovieDB{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        {% if movie.poster_path %}
+        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="img-fluid rounded"
+            alt="{{ movie.title }}">
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h2>{{ movie.title }}</h2>
+        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+        <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
+        <p><strong>Overview:</strong> {{ movie.overview }}</p>
+        <!-- Add save to list/favorites button here if needed -->
+    </div>
+</div>
+{% endblock %}

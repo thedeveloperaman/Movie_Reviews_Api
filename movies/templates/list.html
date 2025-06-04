@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}My Saved Movies | MovieDB{% endblock %}
+{% block content %}
+<h2 class="mb-4">My Saved Movies</h2>
+{% if saved_movies %}
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for movie in saved_movies %}
+    <div class="col">
+        <div class="card h-100">
+            {% if movie.poster_path %}
+            <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" class="card-img-top"
+                alt="{{ movie.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.title }}</h5>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{% url 'movies:detail' movie.tmdb_id %}" class="btn btn-outline-primary btn-sm w-100">View
+                    Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>You have not saved any movies yet.</p>
+{% endif %}
+{% endblock %}
