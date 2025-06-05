@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{% if edit_mode %}Edit Movie List{% else %}Create Movie List{% endif %} | MovieDB{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4 text-center">{% if edit_mode %}Edit Movie List{% else %}Create New Movie List{% endif %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.name.label_tag }} {{ form.name }}
+                {{ form.name.errors }}
+            </div>
+            <div class="mb-3">
+                {{ form.description.label_tag }} {{ form.description }}
+                {{ form.description.errors }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+                {% if edit_mode %}Save Changes{% else %}Create List{% endif %}
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

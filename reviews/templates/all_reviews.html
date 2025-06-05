@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}My Reviews | MovieDB{% endblock %}
+{% block title %}All Reviews | MovieDB{% endblock %}
 {% block content %}
-<h2 class="mb-4">My Reviews</h2>
+<h2 class="mb-4">All User Reviews</h2>
 {% if reviews %}
 <div class="row row-cols-1 row-cols-md-2 g-4">
     {% for review in reviews %}
@@ -19,6 +19,9 @@
                         <a href="{% url 'movies:detail' review.tmdb_id %}">{{ review.movie_title }}</a>
                     </h5>
                     <div>
+                        <strong>User:</strong> {{ review.user.username }}
+                    </div>
+                    <div>
                         <strong>Rating:</strong> {{ review.rating }}/10
                     </div>
                     <div>
@@ -34,6 +37,6 @@
     {% endfor %}
 </div>
 {% else %}
-<p>You haven't written any reviews yet.</p>
+<p>No reviews yet.</p>
 {% endif %}
 {% endblock %}

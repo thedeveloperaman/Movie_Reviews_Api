@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Search Movies | MovieDB{% endblock %}
 {% block content %}
-<h2 class="mb-4">Search Movies</h2>
-<form method="get" class="mb-4">
-    <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search for movies..." value="{{ query }}">
-        <button class="btn btn-primary" type="submit">Search</button>
-    </div>
-</form>
+<h2 class="mb-4">Search Results...</h2>
 {% if results %}
 <div class="row row-cols-1 row-cols-md-4 g-4">
     {% for movie in results %}

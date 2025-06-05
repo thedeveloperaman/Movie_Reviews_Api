@@ -9,15 +9,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/movies/search/">Search</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
+            <form class="d-flex mx-auto" action="{% url 'movies:search' %}" method="get"
+                style="width: 400px; max-width: 100%;">
+                <div class="input-group">
+                    <input class="form-control" type="search" name="q" placeholder="Search for movies..."
+                        aria-label="Search" value="{{ request.GET.q|default:'' }}">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+            <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
@@ -35,6 +37,7 @@
                         <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">My Profile</a></li>
                         <li><a class="dropdown-item" href="/movies/list/">My Lists</a></li>
                         <li><a class="dropdown-item" href="/reviews/my-reviews/">My Reviews</a></li>
+                        <li><a class="dropdown-item" href="{% url 'reviews:all-reviews' %}">All Reviews</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

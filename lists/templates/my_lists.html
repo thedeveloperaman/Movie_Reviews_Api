@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}My Lists | MovieDB{% endblock %}
+{% block content %}
+<h2 class="mb-4">My Movie Lists</h2>
+<a href="{% url 'lists:create-list' %}" class="btn btn-primary mb-3">Create New List</a>
+{% if lists %}
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for movie_list in lists %}
+    <div class="col">
+        <div class="card h-100 position-relative">
+            <div class="card-body">
+                <h5 class="card-title mb-2">
+                    <a href="{% url 'lists:list-detail' movie_list.id %}">{{ movie_list.name }}</a>
+                </h5>
+                <p class="card-text">{{ movie_list.description }}</p>
+                <span class="text-muted small">Created: {{ movie_list.created_at|date:"M d, Y" }}</span>
+            </div>
+            <div class="position-absolute top-0 end-0 m-2 d-flex gap-2">
+                <a href="{% url 'lists:edit-list' movie_list.id %}" class="btn btn-sm btn-outline-primary" title="Edit">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form method="post" action="{% url 'lists:delete-list' movie_list.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete"
+                        onclick="return confirm('Are you sure you want to delete this list?');">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>You have not created any lists yet.</p>
+{% endif %}
+{% endblock %}

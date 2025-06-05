@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Home | MovieDB{% endblock %}
-
+{% block title %}{{ section_title }} | MovieDB{% endblock %}
 {% block styles %}
 <style>
     body {
@@ -15,23 +12,6 @@
         font-weight: 700;
         margin: 40px 0 10px 0;
         letter-spacing: 1px;
-    }
-
-    .section-desc {
-        color: #b0b8c1;
-        margin-bottom: 18px;
-        font-size: 1.1rem;
-    }
-
-    .show-all-link {
-        font-size: 1rem;
-        color: #ffb400;
-        text-decoration: none;
-        margin-left: 10px;
-    }
-
-    .show-all-link:hover {
-        text-decoration: underline;
     }
 
     .movies-grid {
@@ -121,23 +101,18 @@
     }
 </style>
 {% endblock %}
-
 {% block content %}
 <div class="container-fluid px-4">
-
-    <!-- New Movies Section -->
-    <div class="d-flex align-items-center justify-content-between">
-        <h2 class="movie-section-title">New Movies</h2>
-        <a href="{% url 'movies:genre-list' %}?genre=adventure" class="show-all-link">Show All</a>
-    </div>
-    <div class="section-desc">Check out the latest movies now playing in theaters.</div>
+    <h2 class="movie-section-title">{{ section_title }}</h2>
     <div class="movies-grid">
-        {% for movie in new_movies %}
+        {% for movie in movies %}
         <div class="movie-card">
             <a href="{% url 'movies:detail' movie.id %}">
                 <img class="movie-poster" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
                     alt="{{ movie.title }}">
-                <span class="movie-rating-badge">{{ movie.vote_average|default:"-" }}</span>
+                <span class="movie-rating-badge">
+                    {{ movie.vote_average|default:"-" }}
+                </span>
             </a>
             <div class="movie-title">{{ movie.title }}</div>
             <div class="movie-genres">
@@ -148,32 +123,8 @@
                 {% endif %}
             </div>
         </div>
-        {% endfor %}
-    </div>
-
-    <!-- Top Movies Section -->
-    <div class="d-flex align-items-center justify-content-between">
-        <h2 class="movie-section-title">Top Movies</h2>
-        <a href="{% url 'movies:genre-list' %}?genre=top" class="show-all-link">Show All</a>
-    </div>
-    <div class="section-desc">Browse the top-rated movies loved by audiences worldwide.</div>
-    <div class="movies-grid">
-        {% for movie in top_movies %}
-        <div class="movie-card">
-            <a href="{% url 'movies:detail' movie.id %}">
-                <img class="movie-poster" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
-                    alt="{{ movie.title }}">
-                <span class="movie-rating-badge">{{ movie.vote_average|default:"-" }}</span>
-            </a>
-            <div class="movie-title">{{ movie.title }}</div>
-            <div class="movie-genres">
-                {% if movie.genre_ids %}
-                {{ movie.genre_ids|join:", " }}
-                {% else %}
-                &nbsp;
-                {% endif %}
-            </div>
-        </div>
+        {% empty %}
+        <p class="text-light">No movies to show.</p>
         {% endfor %}
     </div>
 </div>

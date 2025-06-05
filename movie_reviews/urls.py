@@ -9,6 +9,7 @@ urlpatterns = [
     path('movies/', include('movies.urls')),
     path('accounts/', include('accounts.urls')),
     path('reviews/', include('reviews.urls')),
+    path('lists/', include('lists.urls')),  # <-- add this line
     path('admin/', admin.site.urls),
 ]
 
